@@ -1,18 +1,31 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
-  </div>
+  <fragment>
+    <Catalog v-if="categories" :categories="categories" />
+    <router-link v-if="cart.length" :to="CART_PATH">Cart</router-link>
+  </fragment>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+  import Catalog from '@/components/Catalog.vue'
+  import { CART_PATH } from '@/router'
 
-export default {
-  name: "Home",
-  components: {
-    HelloWorld
+  export default {
+    name: 'Home',
+    components: {
+      Catalog
+    },
+    data: function() {
+      return {
+        cart: this.$store.getters.cart
+      }
+    },
+    computed: {
+      categories: function() {
+        return this.$store.getters.business.categories
+      }
+    },
+    created: function() {
+      this.CART_PATH = CART_PATH
+    }
   }
-};
 </script>

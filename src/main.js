@@ -1,12 +1,19 @@
-import Vue from "vue";
-import App from "./App.vue";
-import router from "./router";
-import store from "./store";
+import Vue from 'vue'
+import Fragment from 'vue-fragment'
 
-Vue.config.productionTip = false;
+import App from '@/App.vue'
+import toBRL from '@/filters/toBRL'
+import router from '@/router'
+import store from '@/store'
+
+Vue.config.productionTip = false
+Vue.filter('toBRL', toBRL)
+Vue.use(Fragment.Plugin)
 
 new Vue({
+  render: function(h) {
+    return h(App)
+  },
   router,
-  store,
-  render: h => h(App)
-}).$mount("#app");
+  store
+}).$mount('#app')

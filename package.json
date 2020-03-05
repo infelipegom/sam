@@ -12,6 +12,7 @@
   "dependencies": {
     "core-js": "^3.6.4",
     "vue": "^2.6.11",
+    "vue-fragment": "^1.5.1",
     "vue-router": "^3.1.5",
     "vuex": "^3.1.2"
   },
@@ -37,7 +38,7 @@
     "pre-commit": "lint-staged"
   },
   "lint-staged": {
-    "*.{js,jsx,vue}": [
+    "*.{js,vue}": [
       "vue-cli-service lint",
       "git add"
     ]

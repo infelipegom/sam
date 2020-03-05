@@ -1,25 +1,24 @@
+var isProduction = process.env.NODE_ENV === 'production'
+
 module.exports = {
-  root: true,
   env: {
     node: true
   },
-  extends: ["plugin:vue/essential", "eslint:recommended", "@vue/prettier"],
-  parserOptions: {
-    parser: "babel-eslint"
-  },
-  rules: {
-    "no-console": process.env.NODE_ENV === "production" ? "error" : "off",
-    "no-debugger": process.env.NODE_ENV === "production" ? "error" : "off"
-  },
+  extends: ['@vue/prettier', 'eslint:recommended', 'plugin:vue/essential'],
   overrides: [
     {
-      files: [
-        "**/__tests__/*.{j,t}s?(x)",
-        "**/tests/unit/**/*.spec.{j,t}s?(x)"
-      ],
       env: {
         jest: true
-      }
+      },
+      files: ['**/__tests__/*.js', '**/tests/unit/**/*.spec.js']
     }
-  ]
-};
+  ],
+  parserOptions: {
+    parser: 'babel-eslint'
+  },
+  root: true,
+  rules: {
+    'no-console': isProduction ? 'error' : 'off',
+    'no-debugger': isProduction ? 'error' : 'off'
+  }
+}
