@@ -5,8 +5,8 @@ import store from '@/store'
 
 Vue.use(VueRouter)
 
-export const CART = 'Cart'
-export const CART_PATH = '/cart'
+export const BASKET = 'Basket'
+export const BASKET_PATH = '/basket'
 export const CONFIRMATION = 'Confirmation'
 export const CONFIRMATION_PATH = '/confirmation'
 export const DETAIL = 'Detail'
@@ -18,10 +18,10 @@ const router = new VueRouter({
   routes: [
     {
       component: function() {
-        return import('@/views/Cart.vue')
+        return import('@/views/Basket.vue')
       },
-      name: CART,
-      path: CART_PATH
+      name: BASKET,
+      path: BASKET_PATH
     },
     {
       component: function() {

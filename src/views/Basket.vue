@@ -1,6 +1,6 @@
 <template>
   <fragment>
-    <ItemList :items="cart" />
+    <ItemList :items="basket" />
     <ItemPrice>{{ totalPrice }}</ItemPrice>
   </fragment>
 </template>
@@ -10,14 +10,14 @@
   import ItemPrice from '@/components/ItemPrice.vue'
 
   export default {
-    name: 'Cart',
+    name: 'Basket',
     components: {
       ItemList,
       ItemPrice
     },
     data: function() {
       return {
-        cart: this.$store.getters.cart,
+        basket: this.$store.getters.basket,
         totalPrice: this.$store.getters.totalPrice
       }
     }

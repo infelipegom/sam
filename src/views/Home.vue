@@ -1,13 +1,13 @@
 <template>
   <fragment>
     <Catalog v-if="categories" :categories="categories" />
-    <router-link v-if="cart.length" :to="CART_PATH">Cart</router-link>
+    <router-link v-if="basket.length" :to="BASKET_PATH">Basket</router-link>
   </fragment>
 </template>
 
 <script>
   import Catalog from '@/components/Catalog.vue'
-  import { CART_PATH } from '@/router'
+  import { BASKET_PATH } from '@/router'
 
   export default {
     name: 'Home',
@@ -16,7 +16,7 @@
     },
     data: function() {
       return {
-        cart: this.$store.getters.cart
+        basket: this.$store.getters.basket
       }
     },
     computed: {
@@ -25,7 +25,7 @@
       }
     },
     created: function() {
-      this.CART_PATH = CART_PATH
+      this.BASKET_PATH = BASKET_PATH
     }
   }
 </script>

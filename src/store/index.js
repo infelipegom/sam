@@ -3,31 +3,31 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-export const ADD_TO_CART = 'addToCart'
+export const ADD_TO_BASKET = 'addToBasket'
 export const SET_BUSINESS = 'setBusiness'
 
 export default new Vuex.Store({
   state: {
-    business: {},
-    cart: []
+    basket: [],
+    business: {}
   },
   getters: {
+    basket: function(state) {
+      return state.basket
+    },
     business: function(state) {
       return state.business
     },
-    cart: function(state) {
-      return state.cart
-    },
     totalPrice: function(state) {
-      return state.cart.reduce(
+      return state.basket.reduce(
         (totalPrice, item) => item.price * item.quantity + totalPrice,
         0
       )
     }
   },
   actions: {
-    [ADD_TO_CART]: function(context, itemToAdd) {
-      context.commit(ADD_TO_CART, itemToAdd)
+    [ADD_TO_BASKET]: function(context, itemToAdd) {
+      context.commit(ADD_TO_BASKET, itemToAdd)
     },
     [SET_BUSINESS]: function(context) {
       if (Object.keys(context.state.business).length) {
@@ -44,15 +44,15 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    [ADD_TO_CART]: function(state, itemToAdd) {
-      const foundItem = state.cart.find(function(currentItem) {
+    [ADD_TO_BASKET]: function(state, itemToAdd) {
+      const foundItem = state.basket.find(function(currentItem) {
         return currentItem.id === itemToAdd.id
       })
 
       if (foundItem) {
         foundItem.quantity = itemToAdd.quantity
       } else {
-        state.cart.push(itemToAdd)
+        state.basket.push(itemToAdd)
       }
     },
     [SET_BUSINESS]: function(state, fetchedBusiness) {

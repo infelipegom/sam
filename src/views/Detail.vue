@@ -12,7 +12,7 @@
         :max="MAX_QUANTITY"
         :min="MIN_QUANTITY"
       />
-      <BaseButton @click="addToCart">
+      <BaseButton @click="addToBasket">
         Confirmar {{ (item.price * selectedQuantity) | toBRL }}
       </BaseButton>
     </div>
@@ -27,7 +27,7 @@
   import ItemName from '@/components/ItemName.vue'
   import ItemPrice from '@/components/ItemPrice.vue'
   import { HOME_PATH } from '@/router'
-  import { ADD_TO_CART } from '@/store'
+  import { ADD_TO_BASKET } from '@/store'
 
   const MAX_QUANTITY = 99
   const MIN_QUANTITY = 1
@@ -55,8 +55,8 @@
       this.MIN_QUANTITY = MIN_QUANTITY
     },
     methods: {
-      addToCart: function() {
-        this.$store.dispatch(ADD_TO_CART, {
+      addToBasket: function() {
+        this.$store.dispatch(ADD_TO_BASKET, {
           ...this.item,
           quantity: this.selectedQuantity
         })
