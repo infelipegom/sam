@@ -17,6 +17,12 @@ export default new Vuex.Store({
     },
     cart: function(state) {
       return state.cart
+    },
+    totalPrice: function(state) {
+      return state.cart.reduce(
+        (totalPrice, item) => item.price * item.quantity + totalPrice,
+        0
+      )
     }
   },
   actions: {
