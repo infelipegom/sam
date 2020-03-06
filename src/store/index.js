@@ -4,6 +4,7 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 export const ADD_TO_BASKET = 'addToBasket'
+export const EMPTY_BASKET = 'emptyBasket'
 export const SET_BUSINESS = 'setBusiness'
 
 export default new Vuex.Store({
@@ -28,6 +29,9 @@ export default new Vuex.Store({
   actions: {
     [ADD_TO_BASKET]: function(context, itemToAdd) {
       context.commit(ADD_TO_BASKET, itemToAdd)
+    },
+    [EMPTY_BASKET]: function(context) {
+      context.commit(EMPTY_BASKET)
     },
     [SET_BUSINESS]: function(context) {
       if (Object.keys(context.state.business).length) {
@@ -54,6 +58,9 @@ export default new Vuex.Store({
       } else {
         state.basket.push(itemToAdd)
       }
+    },
+    [EMPTY_BASKET]: function(state) {
+      state.basket = []
     },
     [SET_BUSINESS]: function(state, fetchedBusiness) {
       state.business = fetchedBusiness

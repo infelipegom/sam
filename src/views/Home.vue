@@ -1,7 +1,7 @@
 <template>
   <fragment>
     <Catalog v-if="categories" :categories="categories" />
-    <router-link v-if="basket.length" :to="BASKET_PATH">Basket</router-link>
+    <router-link v-if="basket.length" :to="BASKET_PATH">Cesta</router-link>
   </fragment>
 </template>
 
