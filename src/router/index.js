@@ -1,42 +1,50 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import Home from '@/views/Home.vue'
 import store from '@/store'
 
 Vue.use(VueRouter)
 
 export const CART = 'Cart'
 export const CART_PATH = '/cart'
+export const CONFIRMATION = 'Confirmation'
+export const CONFIRMATION_PATH = '/confirmation'
 export const DETAIL = 'Detail'
 export const DETAIL_PATH = '/detail'
 export const HOME = 'Home'
 export const HOME_PATH = '/'
 
-const routes = [
-  {
-    component: function() {
-      return import('@/views/Cart.vue')
-    },
-    name: CART,
-    path: CART_PATH
-  },
-  {
-    component: function() {
-      return import('@/views/Detail.vue')
-    },
-    name: DETAIL,
-    path: DETAIL_PATH
-  },
-  {
-    component: Home,
-    name: HOME,
-    path: HOME_PATH
-  }
-]
-
 const router = new VueRouter({
-  routes
+  routes: [
+    {
+      component: function() {
+        return import('@/views/Cart.vue')
+      },
+      name: CART,
+      path: CART_PATH
+    },
+    {
+      component: function() {
+        return import('@/views/Confirmation.vue')
+      },
+      name: CONFIRMATION,
+      path: CONFIRMATION_PATH
+    },
+    {
+      component: function() {
+        return import('@/views/Detail.vue')
+      },
+      name: DETAIL,
+      path: DETAIL_PATH
+    },
+    {
+      component: function() {
+        return import('@/views/Home.vue')
+      },
+      name: HOME,
+      path: HOME_PATH
+    }
+  ]
 })
 
 router.beforeEach(function(to, _from, next) {
