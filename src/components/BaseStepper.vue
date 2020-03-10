@@ -8,6 +8,7 @@
 
 <script>
   import BaseButton from '@/components/BaseButton'
+  import clamp from '@/helpers/clamp'
 
   const DECREMENT = 'decrement'
   const INCREMENT = 'increment'
@@ -40,11 +41,11 @@
     },
     methods: {
       decrement: function() {
-        this.count = this.count === MIN_COUNT ? MIN_COUNT : this.count - 1
+        this.count = clamp(this.count - 1, MIN_COUNT, MAX_COUNT)
         this.$emit(DECREMENT, this.count)
       },
       increment: function() {
-        this.count = this.count === MAX_COUNT ? MAX_COUNT : this.count + 1
+        this.count = clamp(this.count + 1, MIN_COUNT, MAX_COUNT)
         this.$emit(INCREMENT, this.count)
       }
     }

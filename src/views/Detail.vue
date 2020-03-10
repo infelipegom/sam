@@ -26,6 +26,7 @@
   import ItemImage from '@/components/ItemImage.vue'
   import ItemName from '@/components/ItemName.vue'
   import ItemPrice from '@/components/ItemPrice.vue'
+  import clamp from '@/helpers/clamp'
   import { HOME_PATH } from '@/router'
   import { ADD_TO_BASKET } from '@/store'
 
@@ -43,9 +44,10 @@
       ItemPrice
     },
     data: function() {
-      const { item } = this.$route.params
+      const { category, item } = this.$route.params
 
       return {
+        category,
         item,
         selectedQuantity: item.quantity
       }
@@ -57,22 +59,24 @@
     methods: {
       addToBasket: function() {
         this.$store.dispatch(ADD_TO_BASKET, {
-          ...this.item,
-          quantity: this.selectedQuantity
+          category: this.category,
+          item: { ...this.item, quantity: this.selectedQuantity }
         })
         this.$router.push(HOME_PATH)
       },
       handleDecrement: function() {
-        this.selectedQuantity =
-          this.selectedQuantity === MIN_QUANTITY
-            ? MIN_QUANTITY
-            : this.selectedQuantity - 1
+        this.selectedQuantity = clamp(
+          this.selectedQuantity - 1,
+          MIN_QUANTITY,
+          MAX_QUANTITY
+        )
       },
       handleIncrement: function() {
-        this.selectedQuantity =
-          this.selectedQuantity === MAX_QUANTITY
-            ? MAX_QUANTITY
-            : this.selectedQuantity + 1
+        this.selectedQuantity = clamp(
+          this.selectedQuantity + 1,
+          MIN_QUANTITY,
+          MAX_QUANTITY
+        )
       }
     }
   }

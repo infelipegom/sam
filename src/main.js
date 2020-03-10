@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Fragment from 'vue-fragment'
 
 import App from '@/App.vue'
-import toBRL from '@/filters/toBRL'
+import toBRL from '@/helpers/toBRL'
 import router from '@/router'
 import store from '@/store'
 

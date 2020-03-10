@@ -20,15 +20,20 @@ export default new Vuex.Store({
       return state.business
     },
     totalPrice: function(state) {
-      return state.basket.reduce(
-        (totalPrice, item) => item.price * item.quantity + totalPrice,
-        0
-      )
+      const items = state.basket.reduce(function(items, category) {
+        return [...items, ...category.items]
+      }, [])
+
+      const totalPrice = items.reduce(function(totalPrice, item) {
+        return item.price * item.quantity + totalPrice
+      }, 0)
+
+      return totalPrice
     }
   },
   actions: {
-    [ADD_TO_BASKET]: function(context, itemToAdd) {
-      context.commit(ADD_TO_BASKET, itemToAdd)
+    [ADD_TO_BASKET]: function(context, payload) {
+      context.commit(ADD_TO_BASKET, payload)
     },
     [EMPTY_BASKET]: function(context) {
       context.commit(EMPTY_BASKET)
@@ -48,22 +53,32 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    [ADD_TO_BASKET]: function(state, itemToAdd) {
-      const foundItem = state.basket.find(function(currentItem) {
-        return currentItem.id === itemToAdd.id
+    [ADD_TO_BASKET]: function(state, payload) {
+      const { category, item } = payload
+
+      const foundCategory = state.basket.find(function(currentCategory) {
+        return currentCategory.id === category.id
       })
 
-      if (foundItem) {
-        foundItem.quantity = itemToAdd.quantity
+      if (foundCategory) {
+        const foundItem = foundCategory.items.find(function(currentItem) {
+          return currentItem.id === item.id
+        })
+
+        if (foundItem) {
+          foundItem.quantity = item.quantity
+        } else {
+          foundCategory.items.push(item)
+        }
       } else {
-        state.basket.push(itemToAdd)
+        state.basket.push({ ...category, items: [item] })
       }
     },
     [EMPTY_BASKET]: function(state) {
       state.basket = []
     },
-    [SET_BUSINESS]: function(state, fetchedBusiness) {
-      state.business = fetchedBusiness
+    [SET_BUSINESS]: function(state, payload) {
+      state.business = payload
     }
   }
 })

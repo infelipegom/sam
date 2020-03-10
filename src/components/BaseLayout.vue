@@ -22,12 +22,12 @@
     },
     props: {
       showContent: {
-        type: Boolean,
-        required: true
+        required: true,
+        type: Boolean
       },
       title: {
-        type: String,
-        required: true
+        required: true,
+        type: String
       }
     },
     created: function() {

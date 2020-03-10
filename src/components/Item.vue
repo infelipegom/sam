@@ -25,28 +25,28 @@
     },
     props: {
       description: {
-        type: String,
-        required: true
+        required: true,
+        type: String
       },
       id: {
-        type: String,
-        required: true
+        required: true,
+        type: String
       },
       image: {
-        type: String,
-        required: true
+        required: true,
+        type: String
       },
       name: {
-        type: String,
-        required: true
-      },
-      quantity: {
-        type: Number,
-        required: true
+        required: true,
+        type: String
       },
       price: {
-        type: Number,
-        required: true
+        required: true,
+        type: Number
+      },
+      quantity: {
+        required: true,
+        type: Number
       }
     }
   }

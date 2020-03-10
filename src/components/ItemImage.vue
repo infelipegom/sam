@@ -7,12 +7,12 @@
     name: 'ItemImage',
     props: {
       image: {
-        type: String,
-        required: true
+        required: true,
+        type: String
       },
       name: {
-        type: String,
-        required: true
+        required: true,
+        type: String
       }
     }
   }

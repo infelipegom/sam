@@ -1,7 +1,11 @@
 <template>
   <fragment>
     <template v-if="!!basket.length">
-      <ItemList :items="basket" />
+      <Catalog
+        :categories="basket"
+        :handleEdit="handleEdit"
+        :handleRemove="handleRemove"
+      />
       <ItemPrice>{{ totalPrice | toBRL }}</ItemPrice>
       <BaseButton @click="emptyBasket">
         Esvaziar Cesta
@@ -15,16 +19,16 @@
 
 <script>
   import BaseButton from '@/components/BaseButton.vue'
-  import ItemList from '@/components/ItemList.vue'
+  import Catalog from '@/components/Catalog.vue'
   import ItemPrice from '@/components/ItemPrice.vue'
-  import { HOME_PATH } from '@/router'
+  import { DETAIL, HOME_PATH } from '@/router'
   import { EMPTY_BASKET } from '@/store'
 
   export default {
     name: 'Basket',
     components: {
       BaseButton,
-      ItemList,
+      Catalog,
       ItemPrice
     },
     computed: {
@@ -41,6 +45,15 @@
     methods: {
       emptyBasket: function() {
         this.$store.dispatch(EMPTY_BASKET)
+      },
+      handleEdit: function(category, item) {
+        this.$router.push({
+          name: DETAIL,
+          params: { category, item }
+        })
+      },
+      handleRemove: function(category, item) {
+        console.log(category, item)
       }
     }
   }
