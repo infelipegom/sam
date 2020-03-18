@@ -22,7 +22,7 @@
   import Catalog from '@/components/Catalog.vue'
   import ItemPrice from '@/components/ItemPrice.vue'
   import { DETAIL, HOME_PATH } from '@/router'
-  import { EMPTY_BASKET } from '@/store'
+  import { EMPTY_BASKET, REMOVE_ITEM } from '@/store'
 
   export default {
     name: 'Basket',
@@ -53,7 +53,9 @@
         })
       },
       handleRemove: function(category, item) {
-        console.log(category, item)
+        if (confirm(`Você tem certeza que quer remover ${item.name}?`)) {
+          this.$store.dispatch(REMOVE_ITEM, { category, item })
+        }
       }
     }
   }

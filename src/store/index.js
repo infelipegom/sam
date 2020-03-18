@@ -5,6 +5,7 @@ Vue.use(Vuex)
 
 export const ADD_TO_BASKET = 'addToBasket'
 export const EMPTY_BASKET = 'emptyBasket'
+export const REMOVE_ITEM = 'removeItem'
 export const SET_BUSINESS = 'setBusiness'
 
 export default new Vuex.Store({
@@ -37,6 +38,9 @@ export default new Vuex.Store({
     },
     [EMPTY_BASKET]: function(context) {
       context.commit(EMPTY_BASKET)
+    },
+    [REMOVE_ITEM]: function(context, payload) {
+      context.commit(REMOVE_ITEM, payload)
     },
     [SET_BUSINESS]: function(context) {
       if (Object.keys(context.state.business).length) {
@@ -76,6 +80,27 @@ export default new Vuex.Store({
     },
     [EMPTY_BASKET]: function(state) {
       state.basket = []
+    },
+    [REMOVE_ITEM]: function(state, payload) {
+      const { category, item } = payload
+
+      const foundCategory = state.basket.find(function(currentCategory) {
+        return currentCategory.id === category.id
+      })
+
+      if (foundCategory) {
+        const items = foundCategory.items.filter(function(currentItem) {
+          return currentItem.id !== item.id
+        })
+
+        if (items.length === 0) {
+          state.basket = []
+
+          console.log(state.basket)
+        } else {
+          foundCategory.items = items
+        }
+      }
     },
     [SET_BUSINESS]: function(state, payload) {
       state.business = payload
